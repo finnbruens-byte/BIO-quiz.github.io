@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Genetics Quiz</title>
+
+<style>
+body{
+font-family: Arial;
+max-width: 700px;
+margin: auto;
+padding: 20px;
+}
+
+.question{
+margin-bottom:20px;
+}
+
+button{
+padding:10px 20px;
+font-size:16px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Genetics Quiz</h1>
+
+<form id="quiz">
+
+<div class="question">
+<p>1. Wat betekent het genotype Aa?</p>
+<label><input type="radio" name="q1" value="A"> A: Homozygoot dominant</label><br>
+<label><input type="radio" name="q1" value="B"> B: Homozygoot recessief</label><br>
+<label><input type="radio" name="q1" value="C"> C: Heterozygoot</label><br>
+<label><input type="radio" name="q1" value="D"> D: Geen allelen</label>
+</div>
+
+<div class="question">
+<p>2. Wat betekent homozygoot?</p>
+<label><input type="radio" name="q2" value="A"> A: Twee verschillende allelen</label><br>
+<label><input type="radio" name="q2" value="B"> B: Twee gelijke allelen</label><br>
+<label><input type="radio" name="q2" value="C"> C: Geen allelen</label><br>
+<label><input type="radio" name="q2" value="D"> D: Vier allelen</label>
+</div>
+
+<div class="question">
+<p>3. Wat betekent heterozygoot?</p>
+<label><input type="radio" name="q3" value="A"> A: Twee verschillende allelen</label><br>
+<label><input type="radio" name="q3" value="B"> B: Twee gelijke allelen</label><br>
+<label><input type="radio" name="q3" value="C"> C: Geen genotype</label><br>
+<label><input type="radio" name="q3" value="D"> D: Alleen recessief</label>
+</div>
+
+<div class="question">
+<p>4. Welk genotype is homozygoot recessief?</p>
+<label><input type="radio" name="q4" value="A"> AA</label><br>
+<label><input type="radio" name="q4" value="B"> Aa</label><br>
+<label><input type="radio" name="q4" value="C"> aa</label><br>
+<label><input type="radio" name="q4" value="D"> A_</label>
+</div>
+
+<div class="question">
+<p>5. Welk genotype is homozygoot dominant?</p>
+<label><input type="radio" name="q5" value="A"> AA</label><br>
+<label><input type="radio" name="q5" value="B"> Aa</label><br>
+<label><input type="radio" name="q5" value="C"> aa</label><br>
+<label><input type="radio" name="q5" value="D"> bb</label>
+</div>
+
+<div class="question">
+<p>6. Wat is een allel?</p>
+<label><input type="radio" name="q6" value="A"> Een soort cel</label><br>
+<label><input type="radio" name="q6" value="B"> Een variant van een gen</label><br>
+<label><input type="radio" name="q6" value="C"> Een chromosoom</label><br>
+<label><input type="radio" name="q6" value="D"> Een eiwit</label>
+</div>
+
+<div class="question">
+<p>7. Welk allel komt tot uiting als het dominant is?</p>
+<label><input type="radio" name="q7" value="A"> Het recessieve allel</label><br>
+<label><input type="radio" name="q7" value="B"> Geen allel</label><br>
+<label><input type="radio" name="q7" value="C"> Het dominante allel</label><br>
+<label><input type="radio" name="q7" value="D"> Beide altijd</label>
+</div>
+
+<div class="question">
+<p>8. Als iemand genotype Aa heeft en A is dominant, welk fenotype zie je?</p>
+<label><input type="radio" name="q8" value="A"> Dominante eigenschap</label><br>
+<label><input type="radio" name="q8" value="B"> Recessieve eigenschap</label><br>
+<label><input type="radio" name="q8" value="C"> Geen eigenschap</label><br>
+<label><input type="radio" name="q8" value="D"> Beide</label>
+</div>
+
+<div class="question">
+<p>9. Wat betekent genotype?</p>
+<label><input type="radio" name="q9" value="A"> Uiterlijk</label><br>
+<label><input type="radio" name="q9" value="B"> Allelencombinatie van een organisme</label><br>
+<label><input type="radio" name="q9" value="C"> Leeftijd</label><br>
+<label><input type="radio" name="q9" value="D"> Gewicht</label>
+</div>
+
+<div class="question">
+<p>10. Wat betekent fenotype?</p>
+<label><input type="radio" name="q10" value="A"> Het genotype</label><br>
+<label><input type="radio" name="q10" value="B"> De allelen</label><br>
+<label><input type="radio" name="q10" value="C"> Het waarneembare kenmerk</label><br>
+<label><input type="radio" name="q10" value="D"> De chromosomen</label>
+</div>
+
+<button type="button" onclick="checkQuiz()">Submit</button>
+
+</form>
+
+<h2 id="result"></h2>
+<p id="wrong"></p>
+
+<script>
+
+const answers = {
+q1:"C",
+q2:"B",
+q3:"A",
+q4:"C",
+q5:"A",
+q6:"B",
+q7:"C",
+q8:"A",
+q9:"B",
+q10:"C"
+}
+
+function checkQuiz(){
+
+let good = 0
+let bad = []
+
+for(let q in answers){
+
+let selected = document.querySelector(`input[name="${q}"]:checked`)
+
+if(selected){
+if(selected.value === answers[q]){
+good++
+}else{
+bad.push(q.replace("q",""))
+}
+}else{
+bad.push(q.replace("q",""))
+}
+
+}
+
+let percent = (good/10)*100
+
+document.getElementById("result").innerText = "You scored " + percent + "%"
+
+if(bad.length > 0){
+document.getElementById("wrong").innerText = "Wrong questions: " + bad.join(", ")
+}else{
+document.getElementById("wrong").innerText = "All answers correct!"
+}
+
+}
+
+</script>
+
+</body>
+</html>
